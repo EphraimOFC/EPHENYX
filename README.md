@@ -1,10 +1,6 @@
 # EPHENYX
 
 <p align="center">
-  <img src="https://ephraimofc.github.io/EPHENYX/assets/brand-mark.svg" alt="EPHENYX identity" width="112" />
-</p>
-
-<p align="center">
   <strong>INDEPENDENTLY BUILT. DISTINCTLY ENGINEERED.</strong><br/>
   <sub>The official digital home of Ephraim Moses.</sub>
 </p>
