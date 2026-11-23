@@ -28,11 +28,11 @@ Ephraim Moses is an independent developer building WhatsApp bots and automation,
 
 | Project | Focus | Repository |
 |---|---|---|
-| **EPHENYX OFC** | WhatsApp automation, utilities and group tools | [Open repository](https://github.com/EphraimOFC/EPHENYX-OFC) |
-| **EPHENYX PRO** | Premium WhatsApp automation and SaaS foundations | [Open repository](https://github.com/EphraimOFC/EPHENYXPRO) |
-| **EPHENYX AI** | Conversational intelligence and integrations | [Open repository](https://github.com/EphraimOFC/EPHENYX-AI) |
-| **EPHENYX CLOUD** | Private storage, file delivery and planned isolated hosting | [Open repository](https://github.com/EphraimOFC/EPHENYX-CLOUD) |
-| **EPHENYX API** | Media search and delivery services | [Open repository](https://github.com/EphraimOFC/mrephraimofc-ephenyx-apis) |
+| **EPHENYX OFC** | WhatsApp automation, utilities and group tools | [Project profile](./ofc.html) · [Repository](https://github.com/EphraimOFC/EPHENYX-OFC) |
+| **EPHENYX PRO** | Premium WhatsApp automation and SaaS foundations | [Project profile](./pro.html) · [Repository](https://github.com/EphraimOFC/EPHENYXPRO) |
+| **EPHENYX AI** | Conversational intelligence and integrations | [Project profile](./ai.html) · [Repository](https://github.com/EphraimOFC/EPHENYX-AI) |
+| **EPHENYX CLOUD** | Private storage, file delivery and planned isolated hosting | [Project profile](./cloud.html) · [Repository](https://github.com/EphraimOFC/EPHENYX-CLOUD) |
+| **EPHENYX API** | Media search and delivery services | [Project profile](./api.html) · [Repository](https://github.com/EphraimOFC/mrephraimofc-ephenyx-apis) |
 
 ## Search visibility
 
