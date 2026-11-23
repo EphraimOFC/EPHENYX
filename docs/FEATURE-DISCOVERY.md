@@ -148,3 +148,20 @@ The first source-code review confirmed these practical design details:
 **Excluded from automatic porting:** `eval`, `shell`, arbitrary `fetch`, mass kick/add/promote/demote, unconsented contact harvesting, view-once bypass, and bulk status/channel actions. These require separate owner/security review and are not part of the default feature shortlist.
 
 No command is being added to a bot by this document. The shortlist remains a source-informed proposal for user selection; designs and command UX will be EPHENYX-native.
+
+
+## Source-code audit — EliteProTech V2 (2026-11-23)
+
+A focused path/source review of the V2 group and tools plugins confirms these implementation details and safety gaps:
+
+| Feature | Source-verified behavior | EPHENYX guardrails |
+|---|---|---|
+| Join approval | `pending` lists up to 50; approve/reject can select mentions, quoted users or number arguments. `all` requires an explicit `confirm` argument and runs sequentially through the safety-delay helper. | Require group admin and bot admin; bounded batches, per-target results, explicit confirmation and audit log. |
+| Join-approval mode | `joinapproval on/off` toggles the group mode. | Explain setting state; persist per group; verify WhatsApp API success. |
+| Disappearing messages | Explicit `off/24h/7d/90d` values. | Admin/bot-admin checks; no silent default; clear confirmation. |
+| Pin/unpin | Reply-to-message pinning; pin durations `24h/7d/30d`. | Enforce admin/bot-admin permissions, duration allowlist and clear target confirmation. |
+| Tagall | Resolves participants, deduplicates JIDs, uses quoted text or a custom message; admin/bot-admin gates are present. | Cap mentions and message length; throttle and warn before large groups. |
+| Poll | Native WhatsApp poll with question, at least two options, single-choice payload. | Validate maximum option count/length and question size; support explicit selectable count only after UX approval. |
+| Hash | Text/replied-text/file hashing; SHA-256 default; algorithm names checked against Node's supported hashes; file ceiling 25 MiB. | Keep default SHA-256, restrict algorithms to a documented allowlist, stream or size-check before download. |
+
+These are source observations, not claims of live feature availability. No V2 code or design is copied. The EPHENYX shortlist remains unchanged pending user selection.
