@@ -120,3 +120,31 @@ EliteProTech V1's single `ElitePro.js` handler contains a broad command set. Thi
 ## Review note
 
 The V1 command names were extracted from the source handler. V2 source inspection confirmed examples of join approval, disappearing messages, pin/unpin, polls, hashing, TikTok and YouTube download, chatbot modes, Tic-Tac-Toe and group member tagging. Commands may be provider-dependent, outdated, or unsafe; source existence is not proof of current functionality. We will validate each selected feature before implementation.
+
+
+## Implementation selection board (reviewed source examples)
+
+The first source-code review confirmed these practical design details:
+
+| Feature | Source behavior verified | EPHENYX recommendation |
+|---|---|---|
+| `tagall` | Resolves group participant IDs, deduplicates mentions, supports quoted text and admin/bot-admin gates | Keep mention cap and rate-limit; allow quoted-message tagging and optional custom header |
+| `poll` | Splits a question and options; single-choice poll payload | Add option-count/length validation and selectable-count support; use WhatsApp native poll |
+| Join approval | Lists pending requests, resolves target aliases, supports approve/reject, and requires a second confirmation for bulk-all | Adopt bounded batches, safety delay, confirmation phrase, clear result summary |
+| Group settings | Central setting command is present in V1 command inventory | Build an EPHENYX settings view; each toggle must explain state and persist independently |
+| Pin/unpin | V2 source path confirmed | Require bot-admin and group-admin; pin replied-to message and display duration |
+| Disappearing messages | V2 source path confirmed | Explicit values only (off/24h/7d/90d); no silent enablement |
+| Hash | V2 source path confirmed | SHA-256 default; only accept bounded file sizes and explain output |
+| Video note | V2 source path confirmed | Cap input duration and size; check FFmpeg availability before processing |
+
+### Suggested command rollout (not yet implemented)
+
+**Tier I — low-risk / everyday utility:** `poll`, `hash`, `ping`, `uptime`, `repo`, `translate`, `note`, `listnote`, `deletenote`, `vcf` (user-supplied contacts only).
+
+**Tier II — admin conveniences:** `tagall`, `pending`, `approve`, `reject`, `joinapproval`, `pin`, `unpin`, `ephemeral`, `groupsettings`, `welcome`, `goodbye`, `antilink`, `antibadword`. All admin features need permission checks, anti-abuse limits and tests.
+
+**Tier III — provider-dependent media:** `tiktok`, `play`, `ytsearch`, `ytmp3`, `ytmp4`, `convert`, `videonote`, `sticker`, `ocr`, `removebg`, `upscale`. Implement only against maintained EPHENYX endpoints, not scraped or arbitrary APIs; display provider errors cleanly and set timeouts/size limits.
+
+**Excluded from automatic porting:** `eval`, `shell`, arbitrary `fetch`, mass kick/add/promote/demote, unconsented contact harvesting, view-once bypass, and bulk status/channel actions. These require separate owner/security review and are not part of the default feature shortlist.
+
+No command is being added to a bot by this document. The shortlist remains a source-informed proposal for user selection; designs and command UX will be EPHENYX-native.
