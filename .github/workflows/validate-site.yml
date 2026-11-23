@@ -38,9 +38,10 @@ jobs:
           if (!robots.includes('Sitemap:')) throw new Error('robots.txt is missing a sitemap declaration');
           if (!sitemap.includes('https://ephraimofc.github.io/EPHENYX/')) throw new Error('Sitemap canonical URL is missing');
           if (!favicon.includes('<svg')) throw new Error('favicon.svg is not SVG markup');
-          const script = [...html.matchAll(/<script([^>]*)>([\\s\\S]*?)<\\/script>/g)]
-            .find(m => !m[1].includes('application/ld+json'));
-          if (!script) throw new Error('Inline site script was not found');
-          fs.writeFileSync('/tmp/portfolio-inline.js', script[2]);
+          const jsonEnd = html.indexOf('</script>');
+          const scriptStart = html.indexOf('<script>', jsonEnd + 9);
+          const scriptEnd = html.indexOf('</script>', scriptStart);
+          if (scriptStart < 0 || scriptEnd < 0) throw new Error('Inline site script was not found');
+          fs.writeFileSync('/tmp/portfolio-inline.js', html.slice(scriptStart + 8, scriptEnd));
           NODE
           node --check /tmp/portfolio-inline.js
