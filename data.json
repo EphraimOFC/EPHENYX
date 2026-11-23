@@ -26,6 +26,18 @@
       "description": "An evolving AI ecosystem for intelligent assistance, tools and integrations.",
       "url": "#connect",
       "label": "In development"
+    },
+    {
+      "name": "EPHENYX CLOUD",
+      "description": "Private storage, tenant-scoped files and the foundation for isolated application hosting.",
+      "url": "https://github.com/EphraimOFC/EPHENYX",
+      "label": "Project overview"
+    },
+    {
+      "name": "EPHENYX API",
+      "description": "Media search and delivery services powering selected EPHENYX tools.",
+      "url": "https://github.com/EphraimOFC/EPHENYX",
+      "label": "Project overview"
     }
   ],
   "contacts": [
