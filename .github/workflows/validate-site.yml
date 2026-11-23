@@ -4,6 +4,12 @@ on:
     branches: [main]
     paths:
       - index.html
+      - ofc.html
+      - pro.html
+      - ai.html
+      - cloud.html
+      - api.html
+      - project.css
       - data.json
       - robots.txt
       - sitemap.xml
@@ -19,7 +25,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - name: Validate JSON, metadata, static project content and inline JavaScript
+      - name: Validate JSON, metadata, project pages and inline JavaScript
         run: |
           node - <<'NODE'
           const fs = require('node:fs');
@@ -28,15 +34,21 @@ jobs:
           const robots = fs.readFileSync('robots.txt', 'utf8');
           const sitemap = fs.readFileSync('sitemap.xml', 'utf8');
           const favicon = fs.readFileSync('favicon.svg', 'utf8');
-          const names = data.projects.map(p => p.name);
-          for (const name of names) {
-            if (!html.includes(name)) throw new Error('Project not present in static HTML: ' + name);
+          for (const project of data.projects) {
+            if (!html.includes(project.name)) throw new Error('Project not present in static HTML: ' + project.name);
           }
           for (const required of ['rel="canonical"', 'name="description"', 'property="og:title"', 'name="twitter:card"']) {
             if (!html.includes(required)) throw new Error('Missing SEO metadata: ' + required);
           }
           if (!robots.includes('Sitemap:')) throw new Error('robots.txt is missing a sitemap declaration');
-          if (!sitemap.includes('https://ephraimofc.github.io/EPHENYX/')) throw new Error('Sitemap canonical URL is missing');
+          for (const page of ['ofc.html', 'pro.html', 'ai.html', 'cloud.html', 'api.html']) {
+            const pageHtml = fs.readFileSync(page, 'utf8');
+            const canonical = 'https://ephraimofc.github.io/EPHENYX/' + page;
+            if (!pageHtml.includes('rel="canonical"') || !pageHtml.includes(canonical)) throw new Error('Project page canonical missing: ' + page);
+            if (!pageHtml.includes('name="description"') || !pageHtml.includes('application/ld+json')) throw new Error('Project page metadata missing: ' + page);
+            if (!sitemap.includes(canonical)) throw new Error('Project page missing from sitemap: ' + page);
+          }
+          if (!sitemap.includes('https://ephraimofc.github.io/EPHENYX/')) throw new Error('Homepage canonical URL is missing');
           if (!favicon.includes('<svg')) throw new Error('favicon.svg is not SVG markup');
           const jsonEnd = html.indexOf('</script>');
           const scriptStart = html.indexOf('<script>', jsonEnd + 9);
