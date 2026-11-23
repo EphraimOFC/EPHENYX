@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://ephraimofc.github.io/EPHENYX/</loc>
-  </url>
+  <url><loc>https://ephraimofc.github.io/EPHENYX/</loc></url>
+  <url><loc>https://ephraimofc.github.io/EPHENYX/projects/ephenyx-pro/</loc></url>
+  <url><loc>https://ephraimofc.github.io/EPHENYX/projects/ephenyx-ofc/</loc></url>
+  <url><loc>https://ephraimofc.github.io/EPHENYX/projects/ephenyx-ai/</loc></url>
+  <url><loc>https://ephraimofc.github.io/EPHENYX/projects/ephenyx-cloud/</loc></url>
+  <url><loc>https://ephraimofc.github.io/EPHENYX/projects/ephenyx-api/</loc></url>
 </urlset>
