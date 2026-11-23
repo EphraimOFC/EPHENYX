@@ -1,0 +1,48 @@
+{
+  "_instructions": "EDIT THIS FILE to update your public website content. Keep JSON valid. Add more projects or contact links by copying an object in the arrays. This file is public: NEVER place passwords, private phone numbers, tokens, API keys or secrets here.",
+  "name": "Ephraim Moses",
+  "heroKicker": "Independent · Digital · Builder",
+  "heroBio": "Building ideas into digital tools, automation and experiences. The work is the signature.",
+  "about": "I’m Ephraim Moses, an independent developer and creator exploring technology, automation, AI and practical digital experiences. This space is a living record of the things I build and the ideas behind them.",
+  "aboutTag": "A mind in motion.",
+  "quote": "Make it useful. Make it unmistakable. Keep evolving.",
+  "contactCaption": "For ideas, collaboration & conversation.",
+  "footer": "© Ephraim Moses · EPHENYX",
+  "projects": [
+    {
+      "name": "EPHENYX OFC",
+      "description": "WhatsApp automation, utility commands and tools made for everyday use.",
+      "url": "https://github.com/EphraimOFC/EPHENYX-OFC",
+      "label": "Explore repository"
+    },
+    {
+      "name": "EPHENYX PRO",
+      "description": "A premium WhatsApp automation platform with SaaS architecture and advanced features.",
+      "url": "https://github.com/EphraimOFC/EPHENYXPRO",
+      "label": "Explore repository"
+    },
+    {
+      "name": "EPHENYX AI",
+      "description": "An evolving AI ecosystem for intelligent assistance, tools and integrations.",
+      "url": "#connect",
+      "label": "In development"
+    }
+  ],
+  "contacts": [
+    {
+      "name": "Facebook",
+      "url": "https://www.facebook.com/share/1F3VkrP8Ye/",
+      "label": "Follow / connect"
+    },
+    {
+      "name": "WhatsApp",
+      "url": "https://wa.me/qr/BTVJLOVQTSO5B1",
+      "label": "Message me"
+    },
+    {
+      "name": "GitHub",
+      "url": "https://github.com/EphraimOFC",
+      "label": "View profile"
+    }
+  ]
+}
