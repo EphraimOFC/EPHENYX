@@ -22,6 +22,10 @@
 
 EPHENYX brings together independent software projects, WhatsApp automation and practical digital tools under one evolving identity.
 
+### Developer profile
+
+Ephraim Moses is an independent developer building WhatsApp bots and automation, AI integrations, Node.js services, media APIs, private cloud infrastructure and digital tools. EPHENYX is the project ecosystem for experiments, engineering work and software releases.
+
 | Project | Focus | Repository |
 |---|---|---|
 | **EPHENYX OFC** | WhatsApp automation, utilities and group tools | [Open repository](https://github.com/EphraimOFC/EPHENYX-OFC) |
