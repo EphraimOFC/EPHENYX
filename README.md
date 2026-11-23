@@ -40,7 +40,7 @@ Indexing and discoverability checklist: [SEO & Google indexing](./docs/SEO-INDEX
 
 ## Feature discovery
 
-A curated shortlist of capabilities reviewed from external bot source trees—selection only, not copied implementations: [Feature discovery and shortlist](./docs/FEATURE-DISCOVERY.md).
+A curated shortlist of capabilities reviewed from external bot source trees—selection only, not copied implementations: [Feature discovery and shortlist](./docs/FEATURE-DISCOVERY.md). Latest source review: [EliteProTech feature findings and safety shortlist](./docs/FEATURE-REVIEW-2026-11-23.md).
 
 ## Connect
 
