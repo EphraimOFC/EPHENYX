@@ -12,32 +12,32 @@
     {
       "name": "EPHENYX OFC",
       "description": "WhatsApp automation, utility commands and tools made for everyday use.",
-      "url": "https://github.com/EphraimOFC/EPHENYX-OFC",
-      "label": "Explore repository"
+      "url": "ofc.html",
+      "label": "Project overview"
     },
     {
       "name": "EPHENYX PRO",
       "description": "A premium WhatsApp automation platform with SaaS architecture and advanced features.",
-      "url": "https://github.com/EphraimOFC/EPHENYXPRO",
-      "label": "Explore repository"
+      "url": "pro.html",
+      "label": "Project overview"
     },
     {
       "name": "EPHENYX AI",
       "description": "An evolving AI ecosystem for intelligent assistance, tools and integrations.",
-      "url": "#connect",
-      "label": "In development"
+      "url": "ai.html",
+      "label": "Project overview"
     },
     {
       "name": "EPHENYX CLOUD",
       "description": "Private storage, tenant-scoped files and the foundation for isolated application hosting.",
-      "url": "https://github.com/EphraimOFC/EPHENYX",
+      "url": "cloud.html",
       "label": "Project overview"
     },
     {
       "name": "EPHENYX API",
       "description": "Media search and delivery services powering selected EPHENYX tools.",
-      "url": "https://github.com/EphraimOFC/mrephraimofc-ephenyx-apis",
-      "label": "Explore repository"
+      "url": "api.html",
+      "label": "Project overview"
     }
   ],
   "contacts": [
