@@ -12,32 +12,42 @@
     {
       "name": "EPHENYX OFC",
       "description": "WhatsApp automation, utility commands and tools made for everyday use.",
-      "url": "https://github.com/EphraimOFC/EPHENYX-OFC",
-      "label": "Explore repository"
+      "url": "https://ephraimofc.github.io/EPHENYX/projects/ephenyx-ofc/",
+      "label": "Project page",
+      "repo": "https://github.com/EphraimOFC/EPHENYX-OFC",
+      "repoLabel": "Repository"
     },
     {
       "name": "EPHENYX PRO",
       "description": "A premium WhatsApp automation platform with SaaS architecture and advanced features.",
-      "url": "https://github.com/EphraimOFC/EPHENYXPRO",
-      "label": "Explore repository"
+      "url": "https://ephraimofc.github.io/EPHENYX/projects/ephenyx-pro/",
+      "label": "Project page",
+      "repo": "https://github.com/EphraimOFC/EPHENYXPRO",
+      "repoLabel": "Repository"
     },
     {
       "name": "EPHENYX AI",
       "description": "An evolving AI ecosystem for intelligent assistance, tools and integrations.",
-      "url": "#connect",
-      "label": "In development"
+      "url": "https://ephraimofc.github.io/EPHENYX/projects/ephenyx-ai/",
+      "label": "Project page",
+      "repo": "https://github.com/EphraimOFC/EPHENYX-AI",
+      "repoLabel": "Repository"
     },
     {
       "name": "EPHENYX CLOUD",
       "description": "Private storage, tenant-scoped files and the foundation for isolated application hosting.",
-      "url": "https://github.com/EphraimOFC/EPHENYX",
-      "label": "Project overview"
+      "url": "https://ephraimofc.github.io/EPHENYX/projects/ephenyx-cloud/",
+      "label": "Project page",
+      "repo": "https://github.com/EphraimOFC/EPHENYX-CLOUD",
+      "repoLabel": "Repository"
     },
     {
       "name": "EPHENYX API",
       "description": "Media search and delivery services powering selected EPHENYX tools.",
-      "url": "https://github.com/EphraimOFC/EPHENYX",
-      "label": "Project overview"
+      "url": "https://ephraimofc.github.io/EPHENYX/projects/ephenyx-api/",
+      "label": "Project page",
+      "repo": "https://github.com/EphraimOFC/mrephraimofc-ephenyx-apis",
+      "repoLabel": "Repository"
     }
   ],
   "contacts": [
