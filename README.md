@@ -34,6 +34,10 @@ Ephraim Moses is an independent developer building WhatsApp bots and automation,
 | **EPHENYX CLOUD** | Private storage, file delivery and planned isolated hosting | [Open repository](https://github.com/EphraimOFC/EPHENYX-CLOUD) |
 | **EPHENYX API** | Media search and delivery services | [Open repository](https://github.com/EphraimOFC/mrephraimofc-ephenyx-apis) |
 
+## Search visibility
+
+Indexing and discoverability checklist: [SEO & Google indexing](./docs/SEO-INDEXING.md).
+
 ## Feature discovery
 
 A curated shortlist of capabilities reviewed from external bot source trees—selection only, not copied implementations: [Feature discovery and shortlist](./docs/FEATURE-DISCOVERY.md).
