@@ -30,6 +30,10 @@ EPHENYX brings together independent software projects, WhatsApp automation and p
 | **EPHENYX CLOUD** | Private storage and file delivery | [Open repository](https://github.com/EphraimOFC/EPHENYX-CLOUD) |
 | **EPHENYX API** | Media search and delivery services | [Open repository](https://github.com/EphraimOFC/mrephraimofc-ephenyx-apis) |
 
+## Feature discovery
+
+A curated shortlist of capabilities reviewed from external bot source trees—selection only, not copied implementations: [Feature discovery and shortlist](./docs/FEATURE-DISCOVERY.md).
+
 ## Connect
 
 - [Instagram](https://www.instagram.com/mrephraimofc/)
