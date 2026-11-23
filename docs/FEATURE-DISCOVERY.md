@@ -148,3 +148,8 @@ The first source-code review confirmed these practical design details:
 **Excluded from automatic porting:** `eval`, `shell`, arbitrary `fetch`, mass kick/add/promote/demote, unconsented contact harvesting, view-once bypass, and bulk status/channel actions. These require separate owner/security review and are not part of the default feature shortlist.
 
 No command is being added to a bot by this document. The shortlist remains a source-informed proposal for user selection; designs and command UX will be EPHENYX-native.
+
+
+## Latest source review
+
+The latest source-backed findings, risks, shortlist tiers and selection status are recorded in [Feature review — 23 November 2026](./FEATURE-REVIEW-2026-11-23.md). No commands have been ported from that review.
