@@ -23,9 +23,15 @@
     },
     {
       "name": "EPHENYX AI",
-      "description": "An evolving AI ecosystem for intelligent assistance, tools and integrations.",
-      "url": "#connect",
-      "label": "In development"
+      "description": "The private conversational intelligence layer being built for the EPHENYX ecosystem.",
+      "url": "https://github.com/EphraimOFC",
+      "label": "Development updates"
+    },
+    {
+      "name": "EPHENYX CLOUD",
+      "description": "The private storage foundation for secure files and delivery across the EPHENYX ecosystem.",
+      "url": "https://github.com/EphraimOFC",
+      "label": "Development updates"
     }
   ],
   "contacts": [
