@@ -79,3 +79,44 @@ A curated capability inventory from the public EliteProTech V1/V2 source trees. 
 - EliteProTech V2: https://github.com/EliteProTech/ELITE-PRO-V2
 
 V2 tree review confirmed the plugin families listed above. The feature names are derived from repository paths and inspected source files; each feature needs compatibility review before implementation.
+
+
+## V1 command inventory (path-verified)
+
+EliteProTech V1's single `ElitePro.js` handler contains a broad command set. This inventory is categorized for selection; it is not a direct implementation plan.
+
+
+### Search, downloads and media
+- TikTok: `tiktok`, `tiktoksearch`, `tiktokstalk`
+- YouTube/media: `play`, `ytmp3`, `video`, `ytmp4`, `yts`, `ytsearch`, `lyrics`, `song`
+- Spotify: `spotifysearch`, `sps`, `spotify`, `splay`
+- Other media: `mediafire`, `pinterest`, `wallpaper`, `hdwallpaper`, `anime`, `fetchimg`, `fetchvid`, `fetchvideo`, `fetchaud`, `fetchaudio`, `shazam`
+
+### AI and generation
+- Chat: `gpt`, `ai`, `chatgpt`, `chatbot`, `gemini`
+- Image tools: `flux`, `image`, `img`, `removebg`, `ocr`, `img2txt`, `hd`, `remini`, `enhance`, `upscale`, `toanime`, `animeavatar`
+- Audio generation: `musicgen`, `aisong`, `elevenlab`
+- All-in-one: `aio`
+
+### Group and automation
+- Group admin: `tagadmin`, `demoteall`, `promoteall`, `kickall`, `addall`, `groupsettings`, `gcalert`
+- Automation: `welcome`, `here`, `autoreact`, `auto_react`, `antilink`, `antidelete`, `anticall`, `autolikestatus`, `autoviewlike`, `setlikestatus`
+- Status: `statusd`, `story`, `fakeigstory`, `igstory`
+
+### Utilities, contacts and information
+- `ping`, `alive`, `test`, `readmore`, `define`, `google`, `gitclone`, `npm`, `npmdownloader`, `npmdownload`, `npmdl`, `fetch`, `update`, `ssweb`, `screenshot`, `shorturl`, `tiny`, `tourl`, `tempurl`, `catbox`, `url`, `imgbb`, `get`, `jid`, `lid`
+- Contacts: `savecontact`, `svcontact`, `vcf`, `sendcontact`, `sencontact`, `contacttag`, `contag`
+- Notes: `note`, `listnote`, `deletenote`
+- Translation/voice: `translate`, `trt`, `tts`
+
+### Entertainment and community
+- `quotes`, `fact`, `truth`, `8ballpool`, `stickkill`, `animeblush`, `animewave`, `animesmile`, `animepoke`, `animewink`, `animebonk`, `animebully`, `waifu`, `neko`, `loli`, `flirt`, `insult`, `pickupline`, `wasted`
+- Religious resources: `bible`, `quran`
+
+### Owner / maintenance — restricted
+- `disable`, `save`, `clearchat`, `eval`, `ev`, `create`, `firelogo`, `cloud`
+- Restricted actions are not candidates for import without a threat model, permissions review, audit logging and explicit owner controls. Arbitrary code execution and unsafe remote fetches are excluded from EPHENYX implementation.
+
+## Review note
+
+The V1 command names were extracted from the source handler. V2 source inspection confirmed examples of join approval, disappearing messages, pin/unpin, polls, hashing, TikTok and YouTube download, chatbot modes, Tic-Tac-Toe and group member tagging. Commands may be provider-dependent, outdated, or unsafe; source existence is not proof of current functionality. We will validate each selected feature before implementation.
