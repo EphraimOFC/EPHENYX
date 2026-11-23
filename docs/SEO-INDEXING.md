@@ -1,54 +1,45 @@
-# EPHENYX — Search visibility plan
+# EPHENYX — Search visibility
 
-**Status:** content foundation improved; live-site technical SEO is not yet verified because the website source/HTML isn't available in this repository.
+**Status:** source-level SEO foundation is present. The dedicated project-page additions in the current draft branch are not live until merged and deployed. Search-engine indexing is not verified.
+
+## Verified in source
+
+- Homepage has a descriptive title and meta description, author, robots directive, canonical URL, Open Graph title/description/URL/type and Person + WebSite structured data.
+- `robots.txt` allows public crawling and references the canonical sitemap.
+- `sitemap.xml` currently lists the homepage; the project-page draft adds five dedicated canonical URLs.
+- The homepage includes project cards with explicit project-page and repository links.
+- The draft adds five static HTML pages with unique titles/descriptions, canonical URLs, Open Graph and Twitter summary metadata, and structured data. They are static/crawlable HTML rather than JavaScript-only content.
+- A Google Search Console verification HTML file is present in the repository. Whether Google has accepted verification or a sitemap submission is not confirmed by source inspection.
 
 ## Search terms to build relevance around
 
-Use naturally in project titles, page descriptions and technical write-ups:
+Use naturally in project titles, descriptions and technical write-ups:
 - Ephraim Moses developer
-- EPHENYX WhatsApp bot / WhatsApp automation
+- EPHENYX WhatsApp automation / WhatsApp bots
 - EPHENYX PRO / EPHENYX OFC
-- EPHENYX AI
-- EPHENYX CLOUD
-- Node.js WhatsApp bot, AI integrations, media API, private cloud systems
+- EPHENYX AI / EPHENYX CLOUD
+- EPHENYX media API
+- Node.js WhatsApp bot, AI integrations, private cloud systems
 
-Avoid stuffing the same phrases into every page. The goal is clear, consistent project identity.
+Avoid stuffing the same phrases into every page. Keep copy accurate about project status.
 
-## Completed content work on this branch
+## After the draft is merged and deployed
 
-- Public README describes the ecosystem and links the main projects.
-- Portfolio copy identifies Ephraim Moses as an independent developer building WhatsApp automation, AI integrations, APIs, cloud systems and digital tools.
-- Portfolio data adds Cloud and API projects and improves descriptions.
-- Feature discovery page documents source-informed capabilities without copying external designs/code.
-
-## Live-site checks needed before publishing
-
-The website source isn't present here, so these are not yet verified:
-1. Unique title and meta description on the home page and project pages.
-2. Canonical URL and Open Graph metadata.
-3. HTTPS, mobile layout and fast loading.
-4. Sitemap and robots.txt that allow public pages to be crawled.
-5. Structured data (Person + SoftwareApplication/Organization where appropriate).
-6. Each project has its own crawlable page, not only JavaScript-rendered cards.
-7. Links are consistent and point to the intended public destinations.
-
-## Google Search Console
-
-1. Verify the official site property.
-2. Submit the sitemap.
-3. Inspect the homepage and each project URL; request indexing only after the page is live and crawlable.
-4. Review Pages/Indexing, Crawl stats and performance reports after data accumulates.
-5. Keep a simple monthly log of indexed URLs and search impressions.
+1. Confirm the live homepage and all five project URLs return HTTPS 200.
+2. Check canonical URLs, mobile layout, page titles/descriptions and structured data in the live HTML.
+3. Open Google Search Console and confirm the verified property; submit the sitemap.
+4. Inspect the homepage and project URLs and request indexing after the pages are live.
+5. Review Indexing, Crawl stats and performance after data accumulates; log indexed URLs and impressions monthly.
 
 Official tools: https://search.google.com/search-console/ and https://developers.google.com/search/docs
+
+## Current search observation
+
+A fresh web search for the exact official site/EPHENYX query did not surface the official site in the results returned. This is an observation from the search tool, not a definitive Google indexing report. Search Console remains the authoritative source.
 
 ## Credible visibility
 
 - Keep GitHub profile and repositories complete, with concise descriptions, screenshots, installation instructions and links back to the official site.
-- Publish real technical progress posts (WhatsApp automation architecture, AI routing/privacy, Cloud security design) and link the project pages.
+- Publish real technical progress posts (WhatsApp automation architecture, AI routing/privacy, Cloud security design) and link to project pages.
 - Add official-site links to social profile bios and posts when they are actually published.
 - Prefer a few high-quality, relevant backlinks over paid spam, link farms or mass directory submissions.
-
-## Current search observation
-
-A web search for the exact official site/EPHENYX query did not return the official site in the results shown. This is an observation from the search tool—not a definitive Google indexing report. Google Search Console is the authoritative way to check the property.
