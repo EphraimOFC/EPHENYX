@@ -1,0 +1,46 @@
+name: Validate portfolio site
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - index.html
+      - data.json
+      - robots.txt
+      - sitemap.xml
+      - favicon.svg
+      - .github/workflows/validate-site.yml
+  push:
+    branches: [main]
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Validate JSON, metadata, static project content and inline JavaScript
+        run: |
+          node - <<'NODE'
+          const fs = require('node:fs');
+          const data = JSON.parse(fs.readFileSync('data.json', 'utf8'));
+          const html = fs.readFileSync('index.html', 'utf8');
+          const robots = fs.readFileSync('robots.txt', 'utf8');
+          const sitemap = fs.readFileSync('sitemap.xml', 'utf8');
+          const favicon = fs.readFileSync('favicon.svg', 'utf8');
+          const names = data.projects.map(p => p.name);
+          for (const name of names) {
+            if (!html.includes(name)) throw new Error('Project not present in static HTML: ' + name);
+          }
+          for (const required of ['rel="canonical"', 'name="description"', 'property="og:title"', 'name="twitter:card"']) {
+            if (!html.includes(required)) throw new Error('Missing SEO metadata: ' + required);
+          }
+          if (!robots.includes('Sitemap:')) throw new Error('robots.txt is missing a sitemap declaration');
+          if (!sitemap.includes('https://ephraimofc.github.io/EPHENYX/')) throw new Error('Sitemap canonical URL is missing');
+          if (!favicon.includes('<svg')) throw new Error('favicon.svg is not SVG markup');
+          const script = [...html.matchAll(/<script([^>]*)>([\\s\\S]*?)<\\/script>/g)]
+            .find(m => !m[1].includes('application/ld+json'));
+          if (!script) throw new Error('Inline site script was not found');
+          fs.writeFileSync('/tmp/portfolio-inline.js', script[2]);
+          NODE
+          node --check /tmp/portfolio-inline.js
