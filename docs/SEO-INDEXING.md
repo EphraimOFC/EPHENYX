@@ -1,33 +1,51 @@
-# EPHENYX — verified SEO/indexing notes
+# EPHENYX — SEO and indexing notes
+
+## Current public site
+
+The official site is hosted on GitHub Pages:
+
+- Homepage: https://ephraimofc.github.io/EPHENYX/
+- EPHENYX OFC: https://ephraimofc.github.io/EPHENYX/ofc.html
+- EPHENYX PRO: https://ephraimofc.github.io/EPHENYX/pro.html
+- EPHENYX AI: https://ephraimofc.github.io/EPHENYX/ai.html
+- EPHENYX CLOUD: https://ephraimofc.github.io/EPHENYX/cloud.html
+- EPHENYX API: https://ephraimofc.github.io/EPHENYX/api.html
+
+Each project profile has a unique title and description, canonical URL, Open Graph metadata and JSON-LD WebPage data. Homepage project cards and README navigation link to the project profiles. The sitemap lists the homepage and all five profiles.
 
 ## Source audit
 
-The current homepage source contains:
+The homepage and project pages include:
 
-- A descriptive title and meta description.
-- Canonical URL: `https://ephraimofc.github.io/EPHENYX/`.
-- `robots=index,follow`, Open Graph title/description/url/type and a Person + WebSite JSON-LD graph.
+- Descriptive titles and meta descriptions.
+- Canonical URLs and `robots=index,follow`.
+- Open Graph metadata and Twitter summary cards.
+- Person + WebSite JSON-LD on the homepage and WebPage JSON-LD on each project profile.
 - A permissive `robots.txt` that references `sitemap.xml`.
-- A sitemap with the single homepage URL. This is accurate while the portfolio remains a one-page site.
-- Project cards that are rendered from `data.json`; the audit branch adds static HTML fallback cards for Cloud and API, so core project information exists before JavaScript runs.
-- Google verification HTML file in the repository. Presence of the file is not proof that Google has verified the property.
+- A sitemap containing the six canonical public pages.
+- Static HTML project-card content, with editable descriptions and destinations in `data.json`.
+- A favicon and preconnect hints for Google Fonts.
 
-## Improvements in the current review branch
+The Google verification HTML file is present in the repository. Its presence is not proof that Google has verified the property.
 
-- Add a favicon and a Twitter summary card.
-- Preconnect to the Google Fonts origins and use a stylesheet link rather than CSS `@import`.
-- Keep project descriptions/links present in static HTML and dynamic data.
-- Point the EPHENYX API card to its actual public repository.
+## Accuracy and trust
 
-## Indexing observation
+The project pages distinguish active development from deployed services. EPHENYX AI, EPHENYX CLOUD runtime hosting and EPHENYX API are not described as live production services until deployment and production checks are complete. The pairing portal is not advertised as available while the current prototype's credential-handling risks remain unresolved.
 
-A web search for the official site/EPHENYX query did not return the site in the results shown. This is an observation from the available search engine, not a definitive Google indexing report. Google Search Console is authoritative.
+## Indexing actions requiring account access
 
-## Still to verify in Search Console
+1. Open Google Search Console and verify the property for `https://ephraimofc.github.io/EPHENYX/`.
+2. Submit `https://ephraimofc.github.io/EPHENYX/sitemap.xml`.
+3. Use URL Inspection for the homepage and each project profile; request indexing where appropriate.
+4. Review Pages/Indexing, crawl issues, mobile usability and search performance as Google gathers data.
+5. Set up Bing Webmaster Tools and submit the same sitemap.
 
-1. Confirm the property is verified and the sitemap is submitted.
-2. Inspect the canonical homepage and request indexing if needed.
-3. Check Pages/Indexing, crawl issues, mobile usability and impressions after data accumulates.
-4. Consider dedicated, crawlable project pages only when there is substantial unique content to publish.
+Official resources:
 
-Official tools: https://search.google.com/search-console/ and https://developers.google.com/search/docs
+- https://search.google.com/search-console/
+- https://developers.google.com/search/docs
+- https://www.bing.com/webmasters/
+
+## Limits
+
+A crawlable site, sitemap and structured metadata make the content easier for search engines to understand; they do not guarantee indexing, rankings, knowledge-panel inclusion or recommendations by Google, Meta AI or other assistants. Accurate public information, consistent official profiles, useful original documentation and a stable custom domain can strengthen discoverability over time.
