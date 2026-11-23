@@ -1,26 +1,53 @@
 # EPHENYX
 
-**The official website of Ephraim Moses** — independent developer, creator and builder exploring software, WhatsApp automation, AI and practical digital tools.
+<p align="center">
+  <img src="https://ephraimofc.github.io/EPHENYX/assets/brand-mark.svg" alt="EPHENYX identity" width="112" />
+</p>
 
-🌐 **Website:** https://ephraimofc.github.io/EPHENYX/
+<p align="center">
+  <strong>INDEPENDENTLY BUILT. DISTINCTLY ENGINEERED.</strong><br/>
+  <sub>The official digital home of Ephraim Moses.</sub>
+</p>
 
-## About
+<p align="center">
+  <a href="https://ephraimofc.github.io/EPHENYX/"><img alt="Visit the official website" src="https://img.shields.io/badge/OPEN-WEBSITE-9B825A?style=flat-square" /></a>
+  <a href="https://github.com/EphraimOFC"><img alt="GitHub profile" src="https://img.shields.io/badge/GITHUB-EphraimOFC-252525?style=flat-square&logo=github" /></a>
+</p>
 
-EPHENYX is the digital home of Ephraim Moses. It brings together selected projects, experiments and ways to connect.
+<p align="center">
+  <a href="#the-ecosystem">The ecosystem</a> &nbsp;·&nbsp;
+  <a href="#connect">Connect</a> &nbsp;·&nbsp;
+  <a href="#site-content">Site content</a>
+</p>
 
-## Projects
+---
 
-- **EPHENYX OFC** — WhatsApp automation, utility commands and tools.
-- **EPHENYX PRO** — premium WhatsApp automation with SaaS architecture.
-- **EPHENYX AI** — an evolving AI ecosystem for assistance, tools and integrations.
+## The ecosystem
+
+EPHENYX brings together independent software projects, WhatsApp automation and practical digital tools under one evolving identity.
+
+| Project | Focus | Repository |
+|---|---|---|
+| **EPHENYX OFC** | WhatsApp automation, utilities and group tools | [Open repository](https://github.com/EphraimOFC/EPHENYX-OFC) |
+| **EPHENYX PRO** | Premium WhatsApp automation and SaaS foundations | [Open repository](https://github.com/EphraimOFC/EPHENYXPRO) |
+| **EPHENYX AI** | Conversational intelligence and integrations | [Open repository](https://github.com/EphraimOFC/EPHENYX-AI) |
+| **EPHENYX CLOUD** | Private storage and file delivery | [Open repository](https://github.com/EphraimOFC/EPHENYX-CLOUD) |
+| **EPHENYX API** | Media search and delivery services | [Open repository](https://github.com/EphraimOFC/mrephraimofc-ephenyx-apis) |
 
 ## Connect
 
-- Instagram: https://www.instagram.com/mrephraimofc/
-- Facebook: https://www.facebook.com/share/1F3VkrP8Ye/
-- WhatsApp: https://wa.me/qr/BTVJLOVQTSO5B1
-- GitHub: https://github.com/EphraimOFC
+- [Instagram](https://www.instagram.com/mrephraimofc/)
+- [Facebook](https://www.facebook.com/share/1F3VkrP8Ye/)
+- [WhatsApp](https://wa.me/qr/BTVJLOVQTSO5B1)
+- [GitHub](https://github.com/EphraimOFC)
 
-## Website content
+## Site content
 
-The public website content can be edited in [data.json](./data.json). Do not put passwords, API keys, tokens or private information in that file.
+The public website content can be edited in [data.json](./data.json). Keep that file limited to public-facing copy and links. Never place passwords, API keys, tokens, session files or private information in the website repository.
+
+---
+
+<p align="center">
+  <sub>EPHENYX / THE OFFICIAL DIGITAL HOME</sub><br/>
+  <sub>Built with intent. Refined over time.</sub>
+</p>
