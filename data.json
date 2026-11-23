@@ -30,6 +30,11 @@
   ],
   "contacts": [
     {
+      "name": "Instagram",
+      "url": "https://www.instagram.com/mrephraimofc/",
+      "label": "Follow / connect"
+    },
+    {
       "name": "Facebook",
       "url": "https://www.facebook.com/share/1F3VkrP8Ye/",
       "label": "Follow / connect"
