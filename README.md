@@ -32,7 +32,7 @@ Ephraim Moses is an independent developer building WhatsApp bots and automation,
 | **EPHENYX PRO** | Premium WhatsApp automation and SaaS foundations | [Project profile](./pro.html) · [Repository](https://github.com/EphraimOFC/EPHENYXPRO) |
 | **EPHENYX AI** | Conversational intelligence and integrations | [Project profile](./ai.html) · [Repository](https://github.com/EphraimOFC/EPHENYX-AI) |
 | **EPHENYX CLOUD** | Private storage, file delivery and planned isolated hosting | [Project profile](./cloud.html) · [Repository](https://github.com/EphraimOFC/EPHENYX-CLOUD) |
-| **EPHENYX API** | Media search and delivery services | [Project profile](./api.html) · [Repository](https://github.com/EphraimOFC/mrephraimofc-ephenyx-apis) |
+| **EPHENYX API** | Media search and delivery services | [Project profile](./api.html) · [Repository](https://github.com/EphraimOFC/EPHENYX-APIS) |
 
 ## Search visibility
 
