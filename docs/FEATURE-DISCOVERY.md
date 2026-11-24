@@ -166,3 +166,8 @@ A focused path/source review of the V2 group and tools plugins confirms these im
 
 
 These are source observations, not claims of live feature availability. No V2 code or design is copied. The EPHENYX shortlist remains unchanged pending user selection.
+
+
+## Source-backed review
+
+The detailed source review, implementation safety adaptations, tiers and exclusions are in [Feature review — 23 November 2026](./FEATURE-REVIEW-2026-11-23.md). This is a shortlist for selection only; no commands were added to PRO or OFC.
