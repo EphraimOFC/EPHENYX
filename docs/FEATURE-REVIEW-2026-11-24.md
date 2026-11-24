@@ -67,3 +67,18 @@ These are additions to the existing selection board, not commands approved for i
 - Use EPHENYX API endpoints where media/provider calls are required; avoid scraped or arbitrary providers.
 - Do not execute user uploads in the control plane. Cloud runtime stays isolated and disabled until its release gates are satisfied.
 
+
+
+## Path references
+
+- V1 command handler: [ElitePro.js](https://github.com/EliteProTech/ELITE-PRO-V1/blob/main/ElitePro.js)
+- V2 developer search: [developer.js](https://github.com/EliteProTech/ELITE-PRO-V2/blob/main/plugins/search/developer.js), [developerdownloads.js](https://github.com/EliteProTech/ELITE-PRO-V2/blob/main/lib/developerdownloads.js)
+- V2 image processing: [fliprotate.js](https://github.com/EliteProTech/ELITE-PRO-V2/blob/main/plugins/tools/fliprotate.js), [watermark.js](https://github.com/EliteProTech/ELITE-PRO-V2/blob/main/plugins/tools/watermark.js)
+- V2 audio conversion: [audiospeed.js](https://github.com/EliteProTech/ELITE-PRO-V2/blob/main/plugins/tools/audiospeed.js)
+- V2 invite metadata: [linkinfo.js](https://github.com/EliteProTech/ELITE-PRO-V2/blob/main/plugins/tools/linkinfo.js)
+- V2 channel-post relay: [channelpost.js](https://github.com/EliteProTech/ELITE-PRO-V2/blob/main/plugins/tools/channelpost.js)
+- V2 game start/timeout: [tictactoe.js](https://github.com/EliteProTech/ELITE-PRO-V2/blob/main/plugins/fun/tictactoe.js), [tictactoe.js library](https://github.com/EliteProTech/ELITE-PRO-V2/blob/main/lib/tictactoe.js)
+- V2 owner chat tools: [chattools.js](https://github.com/EliteProTech/ELITE-PRO-V2/blob/main/plugins/owner/chattools.js)
+- V2 message export/replay: [crm.js](https://github.com/EliteProTech/ELITE-PRO-V2/blob/main/plugins/owner/crm.js)
+- V2 view-once sender: [viewonce.js](https://github.com/EliteProTech/ELITE-PRO-V2/blob/main/plugins/tools/viewonce.js)
+- V2 group status relay: [groupstatus.js](https://github.com/EliteProTech/ELITE-PRO-V2/blob/main/plugins/group/groupstatus.js)
