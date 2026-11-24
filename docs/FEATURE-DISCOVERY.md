@@ -171,3 +171,10 @@ These are source observations, not claims of live feature availability. No V2 co
 ## Source-backed review
 
 The detailed source review, implementation safety adaptations, tiers and exclusions are in [Feature review — 23 November 2026](./FEATURE-REVIEW-2026-11-23.md). This is a shortlist for selection only; no commands were added to PRO or OFC.
+
+
+## Additional source audit — 24 November 2026
+
+The follow-up review added more candidates and safety findings from V1/V2, including developer search, image flip/rotate, watermark, audio speed, WhatsApp invite ID lookup, channel-post relay, owner chat tools, and incomplete Tic-Tac-Toe. It also reconfirmed exclusions for arbitrary fetch, eval, message replay, group-status relay and privacy-sensitive view-once utilities.
+
+See [the detailed source review for 24 November 2026](./FEATURE-REVIEW-2026-11-24.md). The shortlist remains selection-only; no commands were implemented.
