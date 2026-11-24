@@ -170,4 +170,4 @@ These are source observations, not claims of live feature availability. No V2 co
 
 ## Source-backed review
 
-The detailed source review, implementation safety adaptations, tiers and exclusions are in [Feature review — 23 November 2026](./FEATURE-REVIEW-2026-11-23.md). This is a shortlist for selection only; no commands were added to PRO or OFC.
+The detailed source review, implementation safety adaptations, tiers and exclusions are in [Feature review — 23 November 2026](./FEATURE-REVIEW-2026-11-23.md) and [EliteProTech V1 source audit — 24 November 2026](./FEATURE-REVIEW-2026-11-24-V1.md). V1 review is pinned to commit `bed443e8e73c24a36218ddca7d4de6264b390ca6`; V2 review is pinned to `f1ed04d3d3ae5651f60912a30790ede916fa2276`. No commands were added to PRO or OFC.
