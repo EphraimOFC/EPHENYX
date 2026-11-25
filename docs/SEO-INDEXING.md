@@ -19,14 +19,22 @@ The homepage and project pages include:
 
 - Descriptive titles and meta descriptions.
 - Canonical URLs and `robots=index,follow`.
-- Open Graph metadata and Twitter summary cards.
+- Open Graph title, description and URL; Twitter summary cards.
 - Person + WebSite JSON-LD on the homepage and WebPage JSON-LD on each project profile.
 - A permissive `robots.txt` that references `sitemap.xml`.
-- A sitemap containing the six canonical public pages.
+- A sitemap containing the six canonical public pages, with `lastmod` based on the latest content commit for each page (2026-11-24).
 - Static HTML project-card content, with editable descriptions and destinations in `data.json`.
 - A favicon and preconnect hints for Google Fonts.
 
+Social previews currently lack a dedicated `og:image` / `twitter:image`. Add a stable, appropriately sized preview asset in a future visual pass; no design asset is being changed in this SEO-only update.
+
 The Google verification HTML file is present in the repository. Its presence is not proof that Google has verified the property.
+
+## Indexing status — 2026-11-25
+
+- The owner previously reported that Google Search Console property verification, sitemap submission and an indexing request were completed. This status has not been independently checked in Search Console during this audit.
+- A public site-specific search did not surface results in this check. That is not definitive evidence that Google has not indexed the site.
+- Sitemap `lastmod` dates are set to the latest source commit date for the pages, not the date of this audit.
 
 ## Accuracy and trust
 
@@ -34,11 +42,10 @@ The project pages distinguish active development from deployed services. EPHENYX
 
 ## Indexing actions requiring account access
 
-1. Open Google Search Console and verify the property for `https://ephraimofc.github.io/EPHENYX/`.
-2. Submit `https://ephraimofc.github.io/EPHENYX/sitemap.xml`.
-3. Use URL Inspection for the homepage and each project profile; request indexing where appropriate.
-4. Review Pages/Indexing, crawl issues, mobile usability and search performance as Google gathers data.
-5. Set up Bing Webmaster Tools and submit the same sitemap.
+1. In Google Search Console, review the sitemap status and Pages/Indexing report.
+2. Inspect the homepage and each project profile; request indexing if the URL is eligible and not already indexed.
+3. Review crawl issues and search performance as Google gathers data.
+4. Set up Bing Webmaster Tools and submit the same sitemap.
 
 Official resources:
 
