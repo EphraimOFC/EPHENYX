@@ -49,7 +49,7 @@ jobs:
             if (!sitemap.includes(canonical)) throw new Error('Project page missing from sitemap: ' + page);
           }
           if (!sitemap.includes('https://ephraimofc.github.io/EPHENYX/')) throw new Error('Homepage canonical URL is missing');
-          const sitemapUrls = [...sitemap.matchAll(/<loc>([^<]+)<\\/loc>/g)].map(match => match[1]);
+          const sitemapUrls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(match => match[1]);
           const expectedUrls = [
             'https://ephraimofc.github.io/EPHENYX/',
             'https://ephraimofc.github.io/EPHENYX/ofc.html',
@@ -59,8 +59,8 @@ jobs:
             'https://ephraimofc.github.io/EPHENYX/api.html'
           ];
           if (sitemapUrls.length !== expectedUrls.length || new Set(sitemapUrls).size !== sitemapUrls.length || expectedUrls.some(url => !sitemapUrls.includes(url))) throw new Error('Sitemap URLs are incomplete or duplicated');
-          const lastmods = [...sitemap.matchAll(/<lastmod>([^<]+)<\\/lastmod>/g)].map(match => match[1]);
-          if (lastmods.length !== sitemapUrls.length || lastmods.some(date => !/^\\d{4}-\\d{2}-\\d{2}$/.test(date) || !Number.isFinite(Date.parse(date)) || new Date(date).toISOString().slice(0, 10) !== date)) throw new Error('Sitemap lastmod dates are missing or invalid');
+          const lastmods = [...sitemap.matchAll(/<lastmod>([^<]+)<\/lastmod>/g)].map(match => match[1]);
+          if (lastmods.length !== sitemapUrls.length || lastmods.some(date => !/^\d{4}-\d{2}-\d{2}$/.test(date) || !Number.isFinite(Date.parse(date)) || new Date(date).toISOString().slice(0, 10) !== date)) throw new Error('Sitemap lastmod dates are missing or invalid');
           if (!favicon.includes('<svg')) throw new Error('favicon.svg is not SVG markup');
           const jsonEnd = html.indexOf('</script>');
           const scriptStart = html.indexOf('<script>', jsonEnd + 9);
