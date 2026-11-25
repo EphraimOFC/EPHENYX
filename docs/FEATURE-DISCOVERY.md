@@ -15,6 +15,7 @@ A curated capability inventory from the public EliteProTech V1/V2 source trees. 
 - **Anti-bot / anti-link / anti-badword / anti-call / anti-group** protection.
 - **Auto-delete selected members** — user-configurable targets, clear/list controls; must be transparent and admin-gated.
 - **Welcome/goodbye** — configurable messages and event handling.
+- **Level/XP progression** — optional per-group XP, rank cards and leaderboard; require bounded storage, retention controls and private atomic persistence.
 - **Status & channel utilities** — status events and channel reactions; opt-in and privacy-aware only.
 
 ### Media and download utilities
@@ -171,3 +172,14 @@ These are source observations, not claims of live feature availability. No V2 co
 ## Source-backed review
 
 The detailed source review, implementation safety adaptations, tiers and exclusions are in [Feature review — 23 November 2026](./FEATURE-REVIEW-2026-11-23.md). This is a shortlist for selection only; no commands were added to PRO or OFC.
+
+
+## Source update — 25 November 2026
+
+The V1 source added a group level system in commit [bed443e](https://github.com/EliteProTech/ELITE-PRO-V1/commit/bed443e8e73c24a36218ddca7d4de6264b390ca6), backed by [lib/levels.js](https://github.com/EliteProTech/ELITE-PRO-V1/blob/11e74a7ed2b6aa72a98bf354339aa82728696a70/lib/levels.js). It provides admin-controlled `levelup on/off`, `level/rank/xp` cards and a top-10 `leaderboard/lb/top`. XP is group-scoped, randomized from 5–15 per counted message, with a 30-second per-user cooldown and quadratic level thresholds. The message tracker skips bot commands, reactions, protocol messages and the bot's own messages.
+
+EPHENYX candidate: a clearly optional per-group progression feature. Before implementation, add a bounded group/user record policy, retention/reset controls, strict data-shape validation, mode-0600 atomic writes and a tested cooldown/anti-farming policy. The source uses a periodic JSON file flush but does not set restrictive file permissions explicitly or cap the stored group/user population.
+
+The V2 source also received a reconnect reliability update in [commit 0f7c55b](https://github.com/EliteProTech/ELITE-PRO-V2/commit/0f7c55b41e9b3719de5ce3f2509f28f75b43e109): close old socket listeners, prevent duplicate reconnect timers, apply disconnect-aware exponential backoff and stop retrying after logout/session takeover. This is a useful engineering pattern, not a feature port; EPHENYX session semantics must be preserved.
+
+V2's [play.js update](https://github.com/EliteProTech/ELITE-PRO-V2/commit/e6c0c8da7b547aaf6b0d310c594171d76ebf793c) now calls `api.eliteprotech.site/download/ytmp3`, checks the API status/format, requires an HTTPS download URL and validates audio signatures. The inspected implementation does not enforce a maximum downloaded byte count or revalidate each redirect target against a strict host allowlist. Treat this as provider-dependent reference only; do not copy it into EPHENYX song.js or change the existing song UX.
