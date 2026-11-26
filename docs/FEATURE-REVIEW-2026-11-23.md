@@ -66,3 +66,12 @@ V2's [play.js update](https://github.com/EliteProTech/ELITE-PRO-V2/commit/e6c0c8
 The V2 TikTok and APK plugins also moved to the `api.eliteprotech.site` host in commits [ca3a2e1](https://github.com/EliteProTech/ELITE-PRO-V2/commit/ca3a2e136bb2561f7b2188c471742e88da009602) and [62be8d1](https://github.com/EliteProTech/ELITE-PRO-V2/commit/62be8d120d5f2d837d5e8169fb0592cf1f0fe683). These are endpoint changes, not proof of independent extraction or provider reliability.
 
 No source code or command UX was copied into EPHENYX. The feature shortlist remains for selection.
+
+
+## Follow-up source audit — 26 November 2026
+
+- V1's [26 November update](https://github.com/EliteProTech/ELITE-PRO-V1/commit/cb8ea6ffd6912eed159ce1d5225fa64f94a2345f) changes provider hostnames for many existing commands. Treat this as a provider migration, not a feature port. The EPHENYX API should own its provider configuration and must not assume that a new upstream hostname is stable or safe merely because the source bot uses it.
+- V2's [25 November index update](https://github.com/EliteProTech/ELITE-PRO-V2/commit/36a624fc3f5d3b85b0adc9b1085640df7729a8fd) removes the conditional Android browser selection and uses Ubuntu Chrome for registered sessions as well. There is no rationale or test result in that commit; it is not adopted.
+- V2's [reconnect refactor](https://github.com/EliteProTech/ELITE-PRO-V2/commit/0f7c55b41e9b3719de5ce3f2509f28f75b43e109) is worth studying for listener cleanup, duplicate-timer prevention, exponential backoff and logout/session-takeover handling. EPHENYX should only adopt the pattern with tests proving that existing auth/session persistence and anti-delete/anti-view-once behavior remain intact.
+
+No command was copied or changed. The feature shortlist remains a selection document, and `song.js` remains untouched.
