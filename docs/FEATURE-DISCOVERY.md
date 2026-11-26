@@ -183,3 +183,14 @@ EPHENYX candidate: a clearly optional per-group progression feature. Before impl
 The V2 source also received a reconnect reliability update in [commit 0f7c55b](https://github.com/EliteProTech/ELITE-PRO-V2/commit/0f7c55b41e9b3719de5ce3f2509f28f75b43e109): close old socket listeners, prevent duplicate reconnect timers, apply disconnect-aware exponential backoff and stop retrying after logout/session takeover. This is a useful engineering pattern, not a feature port; EPHENYX session semantics must be preserved.
 
 V2's [play.js update](https://github.com/EliteProTech/ELITE-PRO-V2/commit/e6c0c8da7b547aaf6b0d310c594171d76ebf793c) now calls `api.eliteprotech.site/download/ytmp3`, checks the API status/format, requires an HTTPS download URL and validates audio signatures. The inspected implementation does not enforce a maximum downloaded byte count or revalidate each redirect target against a strict host allowlist. Treat this as provider-dependent reference only; do not copy it into EPHENYX song.js or change the existing song UX.
+
+
+## Source update — 26 November 2026
+
+The latest V1 commit [cb8ea6f](https://github.com/EliteProTech/ELITE-PRO-V1/commit/cb8ea6ffd6912eed159ce1d5225fa64f94a2345f) moves a broad set of existing integrations—including TikTok search/stalk, MediaFire, NoteGPT, lyrics, Bible, Spotify, Pinterest, image search, OCR, background removal and upscaling—from the previous `eliteprotech-apis.zone.id` host to `api.eliteprotech.site`. This is an API host migration, not a new command capability. It is not evidence that the new host has independent extraction implementations or guaranteed availability.
+
+EPHENYX recommendation: keep provider endpoints behind our own API configuration, validate response schemas, cap response/download sizes, and use reviewed HTTPS hosts. Do not add direct EliteProTech API dependencies to either bot, and do not change the existing `song.js` command design.
+
+The latest V2 commit [36a624f](https://github.com/EliteProTech/ELITE-PRO-V2/commit/36a624fc3f5d3b85b0adc9b1085640df7729a8fd) changes the main socket browser selection to Ubuntu Chrome for both new and registered sessions. The commit contains no explanation or test evidence for that behavioral change. It affects connection identity rather than adding a user feature; do not copy it into EPHENYX without a controlled pairing/reconnect test for each account type.
+
+The V2 reconnect refactor [0f7c55b](https://github.com/EliteProTech/ELITE-PRO-V2/commit/0f7c55b41e9b3719de5ce3f2509f28f75b43e109) remains a useful engineering reference: close old socket listeners, prevent duplicate reconnect timers, apply disconnect-aware exponential backoff, and stop retrying after logout/session takeover. Any adaptation must preserve EPHENYX session directories and current recovery-handler behavior.
