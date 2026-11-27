@@ -29,6 +29,7 @@ A curated capability inventory from the public EliteProTech V1/V2 source trees. 
 - **Polls** — question and multi-option poll creation.
 - **Hashing** — SHA-256 by default, selectable supported algorithms, optional reply-to-file with strict size limit.
 - **Image transformations** — flip/rotate, resize/HD, watermark, sticker and format conversions.
+- **OCR / image text extraction** — reply to or send an image, extract readable text, and offer a copy button; provider, privacy, upload and size limits must be verified before adoption.
 - **Audio conversions** — to audio, speed control and voice-note conversion; FFmpeg dependency health checks.
 - **Video-note conversion** — square crop, short-duration limit and bounded processing.
 - **Profile lookup** — group-visible profile info with privacy protections.
@@ -61,6 +62,7 @@ A curated capability inventory from the public EliteProTech V1/V2 source trees. 
 13. Ping/uptime/health
 14. AI mention/reply mode
 15. AI memory controls
+16. OCR/image text extraction through a reviewed provider
 
 ## Engineering rules
 
@@ -194,3 +196,13 @@ EPHENYX recommendation: keep provider endpoints behind our own API configuration
 The latest V2 commit [36a624f](https://github.com/EliteProTech/ELITE-PRO-V2/commit/36a624fc3f5d3b85b0adc9b1085640df7729a8fd) changes the main socket browser selection to Ubuntu Chrome for both new and registered sessions. The commit contains no explanation or test evidence for that behavioral change. It affects connection identity rather than adding a user feature; do not copy it into EPHENYX without a controlled pairing/reconnect test for each account type.
 
 The V2 reconnect refactor [0f7c55b](https://github.com/EliteProTech/ELITE-PRO-V2/commit/0f7c55b41e9b3719de5ce3f2509f28f75b43e109) remains a useful engineering reference: close old socket listeners, prevent duplicate reconnect timers, apply disconnect-aware exponential backoff, and stop retrying after logout/session takeover. Any adaptation must preserve EPHENYX session directories and current recovery-handler behavior.
+
+
+## Latest EliteProTech source snapshots (reviewed 2026-11-27)
+
+- **V1** main commit `cb8ea6ffd6912eed159ce1d5225fa64f94a2345f` (2026-11-26): the latest commit changes 45 endpoint references in `ElitePro.js` from the old API host to `api.eliteprotech.site`. This is an API-host migration, not a new command feature. Provider availability/response compatibility was not live-tested.
+- **V2** main commit `b64cbe0267ceb0c9a2bd0b18b96e115bafe89ba7` (2026-11-27): adds `plugins/tools/ocr.js`. It accepts a reply/send image, caps the downloaded image at 20 MiB, calls an external OCR endpoint with a 90-second timeout, and offers a copy-text button. The plugin uploads the image to ImgBB first; external image retention is not documented in the source. The OCR route is hosted by EliteProTech, not the EPHENYX API.
+
+### OCR adoption gate
+
+The EPHENYX API main tree currently has no OCR route. Do not port this provider flow as-is: images leave WhatsApp and are uploaded to a third party, so retention/privacy must be verified and users must be informed. If selected, prefer a reviewed EPHENYX-owned endpoint or a vetted provider, explicit consent, allowlisted upload destination, MIME/signature checks, 20 MiB (or smaller) limit, bounded timeout/response size, and local temporary-file cleanup. The feature is a candidate only; no OCR command has been added.
