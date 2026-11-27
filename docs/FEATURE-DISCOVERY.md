@@ -206,3 +206,23 @@ The V2 reconnect refactor [0f7c55b](https://github.com/EliteProTech/ELITE-PRO-V2
 ### OCR adoption gate
 
 The EPHENYX API main tree currently has no OCR route. Do not port this provider flow as-is: images leave WhatsApp and are uploaded to a third party, so retention/privacy must be verified and users must be informed. If selected, prefer a reviewed EPHENYX-owned endpoint or a vetted provider, explicit consent, allowlisted upload destination, MIME/signature checks, 20 MiB (or smaller) limit, bounded timeout/response size, and local temporary-file cleanup. The feature is a candidate only; no OCR command has been added.
+
+
+## Source audit — EliteProTech V2 additional plugins (2026-11-27)
+
+A further path/source review of the current V2 group and download plugins found these capabilities and limits:
+
+| Plugin | Verified behavior | EPHENYX decision / safety notes |
+|---|---|---|
+| `participants.js` | Add, kick, promote and demote resolve mentioned/replied/numeric targets, deduplicate, and verify outcomes. Requests above 5 additions or 10 other participant actions require confirmation. | Candidate for admin convenience only; keep strict limits, confirmation, one-at-a-time delay, bot-admin checks and explicit result reporting. |
+| `requests.js` | Pending requests are listed up to 50. Targeted approve/reject supported; bulk-all requires a reply confirmation within 60 seconds and is processed one request at a time with delay. | Strong candidate; add bounded batches and safe partial-failure summaries. |
+| `antideleteuser.js` | Per-group list/add/remove/clear target settings; skips admins; target list capped at 50; admin and bot-admin gates. | Not a default candidate; needs clear consent, transparency, retention and abuse safeguards. |
+| `groupsettings.js` | Central panel for group status, mute/info/member-add settings, welcome/goodbye, anti-link modes and anti-bot/badword/status settings. Warning limits are bounded 1–10. | Useful settings-panel reference; rebuild native EPHENYX UI and verify each persistence toggle independently. |
+| `download/play.js` | YouTube search/link resolution; provider API timeout 90s; returned download URL must be HTTPS and rejects localhost/numeric IP/colon hosts; MP3 signature/size check; final fetch allows up to 5 redirects and 180s. | Do not copy provider integration. URL check is not a full hostname allowlist or DNS/private-network defense; redirects and returned host need strict controls in our own API. |
+| `owner/crm.js` | Owner-only `.getmsg` exports a quoted message payload up to 5 MB; `.try` replays the exported payload and relay nodes. It blocks protocol messages and verification metadata but can still reproduce interactive/business message structures. | Excluded: message replay can impersonate or reproduce interactive payloads and bypass ordinary UX/consent expectations. No port. |
+
+### Updated feature shortlist
+
+Add **bounded participant administration** (targeted add/kick/promote/demote with confirmation and outcome verification) as a Tier II option. Bulk join approval remains a strong Tier II candidate. Keep targeted auto-delete and message export/replay excluded pending separate consent/security review.
+
+These are source observations, not claims that upstream APIs/providers are reliable or currently functional. No EPHENYX commands were added.
