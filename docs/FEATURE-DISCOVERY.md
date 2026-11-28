@@ -15,6 +15,7 @@ A curated capability inventory from the public EliteProTech V1/V2 source trees. 
 - **Anti-bot / anti-link / anti-badword / anti-call / anti-group** protection.
 - **Auto-delete selected members** — user-configurable targets, clear/list controls; must be transparent and admin-gated.
 - **Welcome/goodbye** — configurable messages and event handling.
+- **Level/XP progression** — optional per-group XP, rank cards and leaderboard; require bounded storage, retention controls and private atomic persistence.
 - **Status & channel utilities** — status events and channel reactions; opt-in and privacy-aware only.
 
 ### Media and download utilities
@@ -28,6 +29,7 @@ A curated capability inventory from the public EliteProTech V1/V2 source trees. 
 - **Polls** — question and multi-option poll creation.
 - **Hashing** — SHA-256 by default, selectable supported algorithms, optional reply-to-file with strict size limit.
 - **Image transformations** — flip/rotate, resize/HD, watermark, sticker and format conversions.
+- **OCR / image text extraction** — reply to or send an image, extract readable text, and offer a copy button; provider, privacy, upload and size limits must be verified before adoption.
 - **Audio conversions** — to audio, speed control and voice-note conversion; FFmpeg dependency health checks.
 - **Video-note conversion** — square crop, short-duration limit and bounded processing.
 - **Profile lookup** — group-visible profile info with privacy protections.
@@ -60,6 +62,7 @@ A curated capability inventory from the public EliteProTech V1/V2 source trees. 
 13. Ping/uptime/health
 14. AI mention/reply mode
 15. AI memory controls
+16. OCR/image text extraction through a reviewed provider
 
 ## Engineering rules
 
@@ -171,3 +174,100 @@ These are source observations, not claims of live feature availability. No V2 co
 ## Source-backed review
 
 The detailed source review, implementation safety adaptations, tiers and exclusions are in [Feature review — 23 November 2026](./FEATURE-REVIEW-2026-11-23.md). This is a shortlist for selection only; no commands were added to PRO or OFC.
+
+
+## Source update — 25 November 2026
+
+The V1 source added a group level system in commit [bed443e](https://github.com/EliteProTech/ELITE-PRO-V1/commit/bed443e8e73c24a36218ddca7d4de6264b390ca6), backed by [lib/levels.js](https://github.com/EliteProTech/ELITE-PRO-V1/blob/11e74a7ed2b6aa72a98bf354339aa82728696a70/lib/levels.js). It provides admin-controlled `levelup on/off`, `level/rank/xp` cards and a top-10 `leaderboard/lb/top`. XP is group-scoped, randomized from 5–15 per counted message, with a 30-second per-user cooldown and quadratic level thresholds. The message tracker skips bot commands, reactions, protocol messages and the bot's own messages.
+
+EPHENYX candidate: a clearly optional per-group progression feature. Before implementation, add a bounded group/user record policy, retention/reset controls, strict data-shape validation, mode-0600 atomic writes and a tested cooldown/anti-farming policy. The source uses a periodic JSON file flush but does not set restrictive file permissions explicitly or cap the stored group/user population.
+
+The V2 source also received a reconnect reliability update in [commit 0f7c55b](https://github.com/EliteProTech/ELITE-PRO-V2/commit/0f7c55b41e9b3719de5ce3f2509f28f75b43e109): close old socket listeners, prevent duplicate reconnect timers, apply disconnect-aware exponential backoff and stop retrying after logout/session takeover. This is a useful engineering pattern, not a feature port; EPHENYX session semantics must be preserved.
+
+V2's [play.js update](https://github.com/EliteProTech/ELITE-PRO-V2/commit/e6c0c8da7b547aaf6b0d310c594171d76ebf793c) now calls `api.eliteprotech.site/download/ytmp3`, checks the API status/format, requires an HTTPS download URL and validates audio signatures. The inspected implementation does not enforce a maximum downloaded byte count or revalidate each redirect target against a strict host allowlist. Treat this as provider-dependent reference only; do not copy it into EPHENYX song.js or change the existing song UX.
+
+
+## Source update — 26 November 2026
+
+The latest V1 commit [cb8ea6f](https://github.com/EliteProTech/ELITE-PRO-V1/commit/cb8ea6ffd6912eed159ce1d5225fa64f94a2345f) moves a broad set of existing integrations—including TikTok search/stalk, MediaFire, NoteGPT, lyrics, Bible, Spotify, Pinterest, image search, OCR, background removal and upscaling—from the previous `eliteprotech-apis.zone.id` host to `api.eliteprotech.site`. This is an API host migration, not a new command capability. It is not evidence that the new host has independent extraction implementations or guaranteed availability.
+
+EPHENYX recommendation: keep provider endpoints behind our own API configuration, validate response schemas, cap response/download sizes, and use reviewed HTTPS hosts. Do not add direct EliteProTech API dependencies to either bot, and do not change the existing `song.js` command design.
+
+The latest V2 commit [36a624f](https://github.com/EliteProTech/ELITE-PRO-V2/commit/36a624fc3f5d3b85b0adc9b1085640df7729a8fd) changes the main socket browser selection to Ubuntu Chrome for both new and registered sessions. The commit contains no explanation or test evidence for that behavioral change. It affects connection identity rather than adding a user feature; do not copy it into EPHENYX without a controlled pairing/reconnect test for each account type.
+
+The V2 reconnect refactor [0f7c55b](https://github.com/EliteProTech/ELITE-PRO-V2/commit/0f7c55b41e9b3719de5ce3f2509f28f75b43e109) remains a useful engineering reference: close old socket listeners, prevent duplicate reconnect timers, apply disconnect-aware exponential backoff, and stop retrying after logout/session takeover. Any adaptation must preserve EPHENYX session directories and current recovery-handler behavior.
+
+
+## Latest EliteProTech source snapshots (reviewed 2026-11-27)
+
+- **V1** main commit `cb8ea6ffd6912eed159ce1d5225fa64f94a2345f` (2026-11-26): the latest commit changes 45 endpoint references in `ElitePro.js` from the old API host to `api.eliteprotech.site`. This is an API-host migration, not a new command feature. Provider availability/response compatibility was not live-tested.
+- **V2** main commit `b64cbe0267ceb0c9a2bd0b18b96e115bafe89ba7` (2026-11-27): adds `plugins/tools/ocr.js`. It accepts a reply/send image, caps the downloaded image at 20 MiB, calls an external OCR endpoint with a 90-second timeout, and offers a copy-text button. The plugin uploads the image to ImgBB first; external image retention is not documented in the source. The OCR route is hosted by EliteProTech, not the EPHENYX API.
+
+### OCR adoption gate
+
+The EPHENYX API main tree currently has no OCR route. Do not port this provider flow as-is: images leave WhatsApp and are uploaded to a third party, so retention/privacy must be verified and users must be informed. If selected, prefer a reviewed EPHENYX-owned endpoint or a vetted provider, explicit consent, allowlisted upload destination, MIME/signature checks, 20 MiB (or smaller) limit, bounded timeout/response size, and local temporary-file cleanup. The feature is a candidate only; no OCR command has been added.
+
+
+## Source audit — EliteProTech V2 additional plugins (2026-11-27)
+
+A further path/source review of the current V2 group and download plugins found these capabilities and limits:
+
+| Plugin | Verified behavior | EPHENYX decision / safety notes |
+|---|---|---|
+| `participants.js` | Add, kick, promote and demote resolve mentioned/replied/numeric targets, deduplicate, and verify outcomes. Requests above 5 additions or 10 other participant actions require confirmation. | Candidate for admin convenience only; keep strict limits, confirmation, one-at-a-time delay, bot-admin checks and explicit result reporting. |
+| `requests.js` | Pending requests are listed up to 50. Targeted approve/reject supported; bulk-all requires a reply confirmation within 60 seconds and is processed one request at a time with delay. | Strong candidate; add bounded batches and safe partial-failure summaries. |
+| `antideleteuser.js` | Per-group list/add/remove/clear target settings; skips admins; target list capped at 50; admin and bot-admin gates. | Not a default candidate; needs clear consent, transparency, retention and abuse safeguards. |
+| `groupsettings.js` | Central panel for group status, mute/info/member-add settings, welcome/goodbye, anti-link modes and anti-bot/badword/status settings. Warning limits are bounded 1–10. | Useful settings-panel reference; rebuild native EPHENYX UI and verify each persistence toggle independently. |
+| `download/play.js` | YouTube search/link resolution; provider API timeout 90s; returned download URL must be HTTPS and rejects localhost/numeric IP/colon hosts; MP3 signature/size check; final fetch allows up to 5 redirects and 180s. | Do not copy provider integration. URL check is not a full hostname allowlist or DNS/private-network defense; redirects and returned host need strict controls in our own API. |
+| `owner/crm.js` | Owner-only `.getmsg` exports a quoted message payload up to 5 MB; `.try` replays the exported payload and relay nodes. It blocks protocol messages and verification metadata but can still reproduce interactive/business message structures. | Excluded: message replay can impersonate or reproduce interactive payloads and bypass ordinary UX/consent expectations. No port. |
+
+### Updated feature shortlist
+
+Add **bounded participant administration** (targeted add/kick/promote/demote with confirmation and outcome verification) as a Tier II option. Bulk join approval remains a strong Tier II candidate. Keep targeted auto-delete and message export/replay excluded pending separate consent/security review.
+
+These are source observations, not claims that upstream APIs/providers are reliable or currently functional. No EPHENYX commands were added.
+
+
+## Source audit — EliteProTech V1/V2 current snapshots (2026-11-28)
+
+The current public source heads were rechecked before updating this inventory:
+
+- **V1** main: [`cb8ea6ffd6912eed159ce1d5225fa64f94a2345f`](https://github.com/EliteProTech/ELITE-PRO-V1/commit/cb8ea6ffd6912eed159ce1d5225fa64f94a2345f), pushed 2026-11-26.
+- **V2** main: [`2120ad8945c8af67f7a256845d73e8cc1ad6e58f`](https://github.com/EliteProTech/ELITE-PRO-V2/commit/2120ad8945c8af67f7a256845d73e8cc1ad6e58f), pushed 2026-11-28.
+
+### New source observations
+
+| Source | Verified behavior / finding | EPHENYX decision |
+|---|---|---|
+| V1 root `.env` | A file named `.env` is tracked in the public V1 repository tree. Its contents were deliberately not fetched or reproduced during this audit. | Treat as a credential-exposure risk until the owner verifies it contains no live values. Rotate any credentials that were ever valid; keep secrets out of source history. |
+| V1 `lib/levels.js` | Group-scoped XP, randomized 5–15 XP per eligible message, 30-second per-user cooldown, quadratic thresholds, level cards and top-10 leaderboard. JSON state is periodically flushed through a temporary file. | Optional Tier III community feature. If selected, add group/user caps, retention/reset controls, strict data-shape validation, file permissions and deterministic anti-farming tests. |
+| V2 `plugins/tools/viewonce.js` | `.once`, `.vo` and `.sendonce` send media supplied by the user or selected through a reply as a new view-once message. | This is a *send-as-view-once* utility, not restoration of someone else's view-once media. It does not solve WhatsApp placeholder delivery and must not be represented as an anti-view-once bypass. |
+| V2 `plugins/owner/fetch.js` | Owner-only fetch resolves DNS, rejects several private/local address ranges, revalidates redirect destinations, caps redirects at 3 and response size at 25 MiB. | Do not copy as-is. The request does not pin the validated DNS answer to the outbound connection, leaving a DNS-rebinding window; the address-range checks also need a complete special-use IPv4/IPv6 policy. Keep EPHENYX URL fetching behind a strict allowlist and network egress controls. |
+| V2 `plugins/tools/hash.js` | SHA-256 default and selectable Node hash names; replied-file limit is checked after `download()` has already buffered the file. | Keep the 25 MiB ceiling or lower it, but enforce it during download/streaming before allocating the full buffer. Use a narrow documented algorithm allowlist. |
+| V2 `plugins/tools/poll.js` | Native single-choice poll with a question and at least two non-empty options. No explicit maximum option count or text length appears in the inspected handler. | Candidate Tier I utility; add question/option length and count validation before sending. |
+| V2 `plugins/group/requests.js` | Targeted approval/rejection supports mentions, quoted senders and numeric inputs; bulk-all requires a reply confirmation and processes one at a time. The local identity comparison uses the JID portion before `@`. | Strong Tier II candidate, but implement canonical PN/LID identity resolution rather than comparing only local parts. Keep explicit confirmation, delay and per-target outcomes. |
+
+### Updated shortlist notes
+
+- Keep **poll**, **hash**, **join approval**, **group XP/leaderboard** and **send-as-view-once for user-supplied media** as distinct candidates with the guardrails above.
+- Keep arbitrary owner URL fetch excluded until a complete DNS/IP/redirect policy and pinned egress implementation exists.
+- Do not treat the V2 `.once` command as a way to recover another person's view-once message. WhatsApp's linked-device placeholder limitation remains separate.
+- No command was imported into PRO or OFC. Existing command UX and `song.js` remain untouched.
+
+These observations are source-level only; upstream provider availability and live WhatsApp behavior were not tested.
+## Source update — EliteProTech latest commits (2026-11-28)
+
+The latest V1/V2 commits were inspected beyond the earlier feature inventory:
+
+- **V1** [cb8ea6ffd6](https://github.com/EliteProTech/ELITE-PRO-V1/commit/cb8ea6ffd6912eed159ce1d5225fa64f94a2345f) only migrates existing TikTok, MediaFire, NoteGPT, lyrics, Bible, Spotify, Pinterest, OCR and image-tool calls to api.eliteprotech.site. This adds no new command capability and is not evidence of live provider compatibility.
+- **V2** [2120ad8945](https://github.com/EliteProTech/ELITE-PRO-V2/commit/2120ad8945c8af67f7a256845d73e8cc1ad6e58f) normalizes the session path once before checking and opening Baileys credentials. It also adds a 2.5-second bounded wait for group metadata lookups, shares in-flight requests, and falls back to cached metadata when a lookup is slow or fails. This is a useful reliability pattern for EPHENYX: bounded waits, request coalescing and stale-cache fallback without changing session identity or credential directories. One caveat: its timeout returns a cached fallback but leaves the in-flight map entry until the original promise settles; if the underlying request never settles, later callers can keep waiting on the same stuck promise. A production adaptation must remove timed-out entries with an identity check and retry safely, or use an abortable request.
+- **V2** [6a578bc964](https://github.com/EliteProTech/ELITE-PRO-V2/commit/6a578bc9647f53c71d6f9c67bddbd6c4e4e993fc) adds saudio/stickeraudio: a five-minute visual/audio session that creates a sound sticker or video from user-supplied media. The source uses FFmpeg, 15 MiB visual and 16 MiB audio ceilings, a 300-second video ceiling and a 120-second conversion timeout. This is a Tier III candidate only; FFmpeg CPU/RAM cost makes it unsuitable for automatic import into constrained bot hosts without profiling and a separate processing worker.
+- **V2** [f471461404](https://github.com/EliteProTech/ELITE-PRO-V2/commit/f471461404733555e2c9a06083fa3ce167416fcf) improves owner fetch MIME detection by checking file signatures before trusting the response header or filename. Its DNS validation/redirect checks remain incomplete against DNS rebinding because the validated address is not pinned to the outbound connection. Keep arbitrary URL fetch excluded; signature detection is a useful secondary validation layer, not a substitute for network isolation.
+
+### Current shortlist impact
+
+- Add bounded group-metadata lookup/cache as an engineering pattern, not a user-facing command.
+- Keep saudio as an optional media-processing candidate, pending resource profiling and isolated-worker design.
+- Add file-signature-first MIME detection to the safe upload/download design checklist.
+- No new V1 feature was found in its latest commit; it is an endpoint migration only.
+- No upstream code or design was copied. Existing EPHENYX command UX and song.js remain unchanged.

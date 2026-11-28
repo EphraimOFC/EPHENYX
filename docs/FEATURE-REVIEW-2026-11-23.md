@@ -53,3 +53,25 @@ V1's handler has a wide mix of media, AI, group moderation, status, contact, inf
 **Excluded by default:** eval, shell, arbitrary fetch, mass kick/add/promote/demote, view-once bypass, unconsented contact exports/harvesting, fake-status tools, and unreviewed owner-only operations.
 
 No commands have been added to PRO or OFC from this review. The shortlist is waiting for selection; existing bot command UX remains preserved.
+
+
+## Follow-up source review — 25 November 2026
+
+The V1 repository's latest change since the previous audit is [commit bed443e](https://github.com/EliteProTech/ELITE-PRO-V1/commit/bed443e8e73c24a36218ddca7d4de6264b390ca6), which exposes `levelup on/off`, `level/rank/xp`, and `leaderboard/lb/top`. The underlying [levels module](https://github.com/EliteProTech/ELITE-PRO-V1/blob/11e74a7ed2b6aa72a98bf354339aa82728696a70/lib/levels.js) stores per-group user XP, grants 5–15 XP with a 30-second per-user cooldown, uses quadratic thresholds, and tracks only eligible group messages. The module's JSON persistence does not explicitly set restrictive file permissions and has no group/user population cap. EPHENYX should treat this as an optional group feature and add bounded storage, retention/reset controls, schema validation and mode-0600 atomic writes before considering implementation.
+
+V2's [15:01 UTC 25 November reconnect commit](https://github.com/EliteProTech/ELITE-PRO-V2/commit/0f7c55b41e9b3719de5ce3f2509f28f75b43e109) closes previous socket listeners, avoids duplicate reconnect timers, applies disconnect-aware exponential backoff and stops reconnecting after logout/session takeover. This is a useful reliability pattern, but it must be evaluated against EPHENYX's existing Baileys session-preservation requirements before adaptation.
+
+V2's [play.js update](https://github.com/EliteProTech/ELITE-PRO-V2/commit/e6c0c8da7b547aaf6b0d310c594171d76ebf793c) switches to the provider's `api.eliteprotech.site/download/ytmp3` endpoint and adds API-status, MP3-format, HTTPS-link and audio-signature checks. The inspected download path has no explicit maximum response-byte limit and follows redirects without an allowlisted redirect-host check. It remains a provider-dependent example, not a reason to change EPHENYX song.js.
+
+The V2 TikTok and APK plugins also moved to the `api.eliteprotech.site` host in commits [ca3a2e1](https://github.com/EliteProTech/ELITE-PRO-V2/commit/ca3a2e136bb2561f7b2188c471742e88da009602) and [62be8d1](https://github.com/EliteProTech/ELITE-PRO-V2/commit/62be8d120d5f2d837d5e8169fb0592cf1f0fe683). These are endpoint changes, not proof of independent extraction or provider reliability.
+
+No source code or command UX was copied into EPHENYX. The feature shortlist remains for selection.
+
+
+## Follow-up source audit — 26 November 2026
+
+- V1's [26 November update](https://github.com/EliteProTech/ELITE-PRO-V1/commit/cb8ea6ffd6912eed159ce1d5225fa64f94a2345f) changes provider hostnames for many existing commands. Treat this as a provider migration, not a feature port. The EPHENYX API should own its provider configuration and must not assume that a new upstream hostname is stable or safe merely because the source bot uses it.
+- V2's [25 November index update](https://github.com/EliteProTech/ELITE-PRO-V2/commit/36a624fc3f5d3b85b0adc9b1085640df7729a8fd) removes the conditional Android browser selection and uses Ubuntu Chrome for registered sessions as well. There is no rationale or test result in that commit; it is not adopted.
+- V2's [reconnect refactor](https://github.com/EliteProTech/ELITE-PRO-V2/commit/0f7c55b41e9b3719de5ce3f2509f28f75b43e109) is worth studying for listener cleanup, duplicate-timer prevention, exponential backoff and logout/session-takeover handling. EPHENYX should only adopt the pattern with tests proving that existing auth/session persistence and anti-delete/anti-view-once behavior remain intact.
+
+No command was copied or changed. The feature shortlist remains a selection document, and `song.js` remains untouched.
