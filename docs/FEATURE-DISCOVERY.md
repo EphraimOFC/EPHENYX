@@ -255,3 +255,19 @@ The current public source heads were rechecked before updating this inventory:
 - No command was imported into PRO or OFC. Existing command UX and `song.js` remain untouched.
 
 These observations are source-level only; upstream provider availability and live WhatsApp behavior were not tested.
+## Source update — EliteProTech latest commits (2026-11-28)
+
+The latest V1/V2 commits were inspected beyond the earlier feature inventory:
+
+- **V1** [cb8ea6ffd6](https://github.com/EliteProTech/ELITE-PRO-V1/commit/cb8ea6ffd6912eed159ce1d5225fa64f94a2345f) only migrates existing TikTok, MediaFire, NoteGPT, lyrics, Bible, Spotify, Pinterest, OCR and image-tool calls to api.eliteprotech.site. This adds no new command capability and is not evidence of live provider compatibility.
+- **V2** [2120ad8945](https://github.com/EliteProTech/ELITE-PRO-V2/commit/2120ad8945c8af67f7a256845d73e8cc1ad6e58f) normalizes the session path once before checking and opening Baileys credentials. It also adds a 2.5-second bounded wait for group metadata lookups, shares in-flight requests, and falls back to cached metadata when a lookup is slow or fails. This is a useful reliability pattern for EPHENYX: bounded waits, request coalescing and stale-cache fallback without changing session identity or credential directories.
+- **V2** [6a578bc964](https://github.com/EliteProTech/ELITE-PRO-V2/commit/6a578bc964e72e1e1f6d7d67e16d4f3d3ec4f7c5) adds saudio/stickeraudio: a five-minute visual/audio session that creates a sound sticker or video from user-supplied media. The source uses FFmpeg, 15 MiB visual and 16 MiB audio ceilings, a 300-second video ceiling and a 120-second conversion timeout. This is a Tier III candidate only; FFmpeg CPU/RAM cost makes it unsuitable for automatic import into constrained bot hosts without profiling and a separate processing worker.
+- **V2** [f471461404](https://github.com/EliteProTech/ELITE-PRO-V2/commit/f471461404d7c43a2ccfca5b27a6ec2b5d8d9d25) improves owner fetch MIME detection by checking file signatures before trusting the response header or filename. Its DNS validation/redirect checks remain incomplete against DNS rebinding because the validated address is not pinned to the outbound connection. Keep arbitrary URL fetch excluded; signature detection is a useful secondary validation layer, not a substitute for network isolation.
+
+### Current shortlist impact
+
+- Add bounded group-metadata lookup/cache as an engineering pattern, not a user-facing command.
+- Keep saudio as an optional media-processing candidate, pending resource profiling and isolated-worker design.
+- Add file-signature-first MIME detection to the safe upload/download design checklist.
+- No new V1 feature was found in its latest commit; it is an endpoint migration only.
+- No upstream code or design was copied. Existing EPHENYX command UX and song.js remain unchanged.
