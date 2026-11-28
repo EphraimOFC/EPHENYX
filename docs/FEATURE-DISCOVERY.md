@@ -226,3 +226,32 @@ A further path/source review of the current V2 group and download plugins found 
 Add **bounded participant administration** (targeted add/kick/promote/demote with confirmation and outcome verification) as a Tier II option. Bulk join approval remains a strong Tier II candidate. Keep targeted auto-delete and message export/replay excluded pending separate consent/security review.
 
 These are source observations, not claims that upstream APIs/providers are reliable or currently functional. No EPHENYX commands were added.
+
+
+## Source audit — EliteProTech V1/V2 current snapshots (2026-11-28)
+
+The current public source heads were rechecked before updating this inventory:
+
+- **V1** main: [`cb8ea6ffd6912eed159ce1d5225fa64f94a2345f`](https://github.com/EliteProTech/ELITE-PRO-V1/commit/cb8ea6ffd6912eed159ce1d5225fa64f94a2345f), pushed 2026-11-26.
+- **V2** main: [`2120ad8945c8af67f7a256845d73e8cc1ad6e58f`](https://github.com/EliteProTech/ELITE-PRO-V2/commit/2120ad8945c8af67f7a256845d73e8cc1ad6e58f), pushed 2026-11-28.
+
+### New source observations
+
+| Source | Verified behavior / finding | EPHENYX decision |
+|---|---|---|
+| V1 root `.env` | A file named `.env` is tracked in the public V1 repository tree. Its contents were deliberately not fetched or reproduced during this audit. | Treat as a credential-exposure risk until the owner verifies it contains no live values. Rotate any credentials that were ever valid; keep secrets out of source history. |
+| V1 `lib/levels.js` | Group-scoped XP, randomized 5–15 XP per eligible message, 30-second per-user cooldown, quadratic thresholds, level cards and top-10 leaderboard. JSON state is periodically flushed through a temporary file. | Optional Tier III community feature. If selected, add group/user caps, retention/reset controls, strict data-shape validation, file permissions and deterministic anti-farming tests. |
+| V2 `plugins/tools/viewonce.js` | `.once`, `.vo` and `.sendonce` send media supplied by the user or selected through a reply as a new view-once message. | This is a *send-as-view-once* utility, not restoration of someone else's view-once media. It does not solve WhatsApp placeholder delivery and must not be represented as an anti-view-once bypass. |
+| V2 `plugins/owner/fetch.js` | Owner-only fetch resolves DNS, rejects several private/local address ranges, revalidates redirect destinations, caps redirects at 3 and response size at 25 MiB. | Do not copy as-is. The request does not pin the validated DNS answer to the outbound connection, leaving a DNS-rebinding window; the address-range checks also need a complete special-use IPv4/IPv6 policy. Keep EPHENYX URL fetching behind a strict allowlist and network egress controls. |
+| V2 `plugins/tools/hash.js` | SHA-256 default and selectable Node hash names; replied-file limit is checked after `download()` has already buffered the file. | Keep the 25 MiB ceiling or lower it, but enforce it during download/streaming before allocating the full buffer. Use a narrow documented algorithm allowlist. |
+| V2 `plugins/tools/poll.js` | Native single-choice poll with a question and at least two non-empty options. No explicit maximum option count or text length appears in the inspected handler. | Candidate Tier I utility; add question/option length and count validation before sending. |
+| V2 `plugins/group/requests.js` | Targeted approval/rejection supports mentions, quoted senders and numeric inputs; bulk-all requires a reply confirmation and processes one at a time. The local identity comparison uses the JID portion before `@`. | Strong Tier II candidate, but implement canonical PN/LID identity resolution rather than comparing only local parts. Keep explicit confirmation, delay and per-target outcomes. |
+
+### Updated shortlist notes
+
+- Keep **poll**, **hash**, **join approval**, **group XP/leaderboard** and **send-as-view-once for user-supplied media** as distinct candidates with the guardrails above.
+- Keep arbitrary owner URL fetch excluded until a complete DNS/IP/redirect policy and pinned egress implementation exists.
+- Do not treat the V2 `.once` command as a way to recover another person's view-once message. WhatsApp's linked-device placeholder limitation remains separate.
+- No command was imported into PRO or OFC. Existing command UX and `song.js` remain untouched.
+
+These observations are source-level only; upstream provider availability and live WhatsApp behavior were not tested.
